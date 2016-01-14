@@ -34,8 +34,7 @@ RCache.prototype.get = function(key, ttl, callback){
             callback(error, value);
         });          
     }
-    else process.nextTick(callback);
-       
+    else process.nextTick(callback);      
 }
 
 RCache.prototype.set = function(key, value, ttl, callback){

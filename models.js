@@ -42,7 +42,6 @@ ItemSale.prototype.getCount = function(item, city, next){
             done();
             return next(null, results);
         });
-
     });
 }
 
@@ -82,7 +81,6 @@ ItemSale.prototype.getItem = function(item, city, next){
             done();
             return next(null, results);
         });
-
     });
 }
 

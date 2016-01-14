@@ -30,8 +30,6 @@ fs.exists('./config.json', function(exists) {
      * Create HTTP server.
      */
 
-
-
     /**
      * This initializes a connection pool
      * it will keep idle connections open for a (configurable) 30 seconds
@@ -103,9 +101,6 @@ fs.exists('./config.json', function(exists) {
         var addr = server.address();
         var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
         debug('Listening on ' + bind);
-    }
-      
-
-
+    }     
 });
 
