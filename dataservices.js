@@ -24,29 +24,34 @@ var RCache = function(){
     }
 };
 
-RCache.prototype.get = function(key, ttl, callback){
+RCache.prototype.get = function(key, callback){
     var self = this;
 
-    if(self.localCache[key]) return process.nextTick(function(){ callback(null, self.localCache[key]); });
-    else if(self.cache && Object.keys(self.localCache).length > MAX_LOCAL_KEYS){
+    if(self.localCache[key]){
+        var value = self.localCache[key];
+        return process.nextTick(function(){ callback(null, value); });   
+    } 
+    else if(self.cache){
         self.cache.get(key, function(error, value) {
-            if (ttl) self.cache.expire(key, ttl);
+            if(value && Object.keys(self.localCache).length < MAX_LOCAL_KEYS){
+                self.localCache[key] = value;
+            }         
             callback(error, value);
         });          
     }
     else process.nextTick(callback);      
 }
 
-RCache.prototype.set = function(key, value, ttl, callback){
+RCache.prototype.set = function(key, value, callback){
     var self = this;
-    if(Object.keys(self.localCache).length <= MAX_LOCAL_KEYS){
+
+    if(value && Object.keys(self.localCache).length < MAX_LOCAL_KEYS){
         self.localCache[key] = value;
-        return process.nextTick(callback);
+        process.nextTick(callback);
     }
-    else if(self.cache){
+    if(value && self.cache){
         self.cache.set(key, value, function(error){
-            if (ttl) self.cache.expire(key, ttl);
-            callback(error);
+
         });       
     }    
 }

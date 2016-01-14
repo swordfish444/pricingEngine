@@ -36,7 +36,7 @@ Content.prototype.getValue = function(){
 } 
 Content.prototype.addToCache = function(next){
     var self = this;
-    rcache.set(self.getKey(), self.getValue(), ttl, next);
+    rcache.set(self.getKey(), self.getValue(), next);
 }
 Content.prototype.calculate = function(item, city, next){
 	var self = this;
@@ -44,7 +44,7 @@ Content.prototype.calculate = function(item, city, next){
     else self.city = 'Not specified';
 	self.item = item;
 
-    rcache.get(self.getKey(), config['cache-ttl'] || null, function(error, value){
+    rcache.get(self.getKey(), function(error, value){
         if(error) debug(error);
         // Cache-miss
         if(!value){

@@ -10,6 +10,7 @@ coverage
 .grunt
 .lock-wscript
 build/Release
+test
 node_modules
 config.json
 *.db
