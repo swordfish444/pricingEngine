@@ -1,9 +1,11 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-
+var compression = require('compression');
+var favicon = require('serve-favicon');
+var methodOverride = require('method-override');
+var responseTime = require('response-time');
 var routes = require('./routes.js');
 var app = express();
 
@@ -12,11 +14,14 @@ var app = express();
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(logger('dev'));
+app.use(compression());
+app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(responseTime({ digits: 1 }));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 

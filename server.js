@@ -30,12 +30,6 @@ fs.exists('./config.json', function(exists) {
      * Create HTTP server.
      */
 
-    /**
-     * This initializes a connection pool
-     * it will keep idle connections open for a (configurable) 30 seconds
-     * and set a limit of 20 (also configurable)
-     */
-
 
     var server = http.createServer(app);
 
