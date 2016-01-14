@@ -12,5 +12,6 @@ coverage
 build/Release
 node_modules
 config.json
+*.db
 .npmrc
 
