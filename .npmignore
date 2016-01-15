@@ -7,5 +7,8 @@ config.json
 .deployment
 .azuredeploy/
 help/
+jmeter/
 test/
 administration/
+jmeter-logs.csv
+*.pem
